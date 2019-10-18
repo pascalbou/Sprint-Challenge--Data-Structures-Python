@@ -19,22 +19,42 @@ duplicates = []
 #             duplicates.append(name_1)
 
 # Final solution
-# create 26 lists for each of letter in alphabet
+# create 26 * 26 lists for each of letters in alphabet
 # loop through names_1 and append name according to its first letter
 # loop through names_2 and only search in the array with the same first letter
 # compute time is around 1/10th of a second
 
 all_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-all_names1 = {letter: [] for letter in all_letters}
+double_letters = []
+for letter in all_letters:
+    f = letter
+    for letter in all_letters:
+        s = letter
+        fs = f + s
+        double_letters.append(fs)
+# print(double_letters)
+
+all_names1 = {letter: [] for letter in double_letters}
 for name_1 in names_1:
-    first_letter = name_1[0].lower()
-    all_names1[first_letter].append(name_1)
+    letters = name_1[0].lower() + name_1[1].lower()
+    all_names1[letters].append(name_1)
 # print(all_names1)
 
 for name_2 in names_2:
-    first_letter = name_2[0].lower()
-    if name_2 in all_names1[name_2[0].lower()]:
+    letters = name_2[0].lower() + name_2[1].lower()
+    if name_2 in all_names1[letters]:
         duplicates.append(name_2)
+
+# all_names1 = {letter: [] for letter in all_letters}
+# for name_1 in names_1:
+#     first_letter = name_1[0].lower()
+#     all_names1[first_letter].append(name_1)
+# # print(all_names1)
+
+# for name_2 in names_2:
+#     first_letter = name_2[0].lower()
+#     if name_2 in all_names1[name_2[0].lower()]:
+#         duplicates.append(name_2)
 
 # first solution
 # try hash table
